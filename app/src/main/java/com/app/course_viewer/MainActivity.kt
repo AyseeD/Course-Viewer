@@ -1,0 +1,116 @@
+package com.app.course_viewer.ui
+
+import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.course_viewer.adapter.CourseAdapter
+import com.app.course_viewer.databinding.ActivityMainBinding
+import com.app.course_viewer.model.Course
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: CourseAdapter
+    private lateinit var courses: List<Course>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        courses = createStaticCourses()
+
+        adapter = CourseAdapter(courses) { course ->
+            showCourseDetails(course)
+        }
+
+        binding.rvCourses.layoutManager = LinearLayoutManager(this)
+        binding.rvCourses.adapter = adapter
+
+        setupSemesterSpinner()
+        setupSortSpinner()
+        setupSearchView()
+    }
+
+    private fun createStaticCourses(): List<Course> {
+        return listOf(
+            Course("CENG 101", "Introduction to Programming", 4, "Fall"),
+            Course("CENG 210", "Data Structures", 3, "Spring"),
+            Course("CENG 330", "Operating Systems", 4, "Fall"),
+            Course("CENG 343", "Mobile Applications", 3, "Spring"),
+            Course("MATH 201", "Linear Algebra", 3, "Fall"),
+            Course("PHYS 101", "Physics I", 4, "Spring"),
+            Course("CENG 443", "Software Engineering", 3, "Fall"),
+            Course("ELEC 220", "Digital Systems", 3, "Spring"),
+            Course("CENG 421", "Computer Networks", 3, "Fall"),
+            Course("STAT 250", "Probability & Statistics", 3, "Spring"),
+            Course("CIVL 110", "Engineering Drawing", 2, "Fall")
+        )
+    }
+
+    private fun setupSemesterSpinner() {
+        val options = listOf("All", "Fall", "Spring")
+        val adapterArray = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, options)
+        binding.spinnerSemester.adapter = adapterArray
+        binding.spinnerSemester.setSelection(0)
+        binding.spinnerSemester.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
+                val sel = options[position]
+                adapter.setSemesterFilter(sel)
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
+        }
+    }
+
+    private fun setupSortSpinner() {
+        val sortOptions = listOf("None", "Code (A → Z)", "Credits (High → Low)")
+        val sortAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sortOptions)
+        binding.spinnerSort.adapter = sortAdapter
+        binding.spinnerSort.setSelection(0)
+        binding.spinnerSort.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
+                when (position) {
+                    0 -> adapter.setSortMode(CourseAdapter.SortMode.NONE)
+                    1 -> adapter.setSortMode(CourseAdapter.SortMode.CODE_ASC)
+                    2 -> adapter.setSortMode(CourseAdapter.SortMode.CREDITS_DESC)
+                }
+                // re-run filter so sorting applies to current filtered set
+                adapter.setSearchQuery(binding.searchView.query?.toString() ?: "")
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
+        }
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setIconifiedByDefault(false)
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.setSearchQuery(query ?: "")
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.setSearchQuery(newText ?: "")
+                return true
+            }
+        })
+    }
+
+    private fun showCourseDetails(course: Course) {
+        val msg = """
+            Code: ${course.code}
+            Name: ${course.name}
+            Credits: ${course.credits}
+            Semester: ${course.semester}
+        """.trimIndent()
+
+        AlertDialog.Builder(this)
+            .setTitle("Course Details")
+            .setMessage(msg)
+            .setPositiveButton("OK", null)
+            .show()
+    }
+}

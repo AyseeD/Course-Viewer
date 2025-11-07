@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvCourseCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CENG 000"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvCourseName"
+        app:layout_constraintHorizontal_bias="0" />
+
+    <TextView
+        android:id="@+id/tvCourseName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Course Name"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintStart_toEndOf="@id/tvCourseCode"
+        app:layout_constraintTop_toTopOf="@id/tvCourseCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0" />
+
+    <TextView
+        android:id="@+id/tvCourseMeta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 • Fall"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tvCourseCode"
+        app:layout_constraintTop_toBottomOf="@id/tvCourseCode"
+        android:layout_marginTop="6dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
