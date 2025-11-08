@@ -4,5 +4,6 @@ class Course(
     val code: String,
     val name:String,
     val credits: Int,
-    val semester: String
+    val semester: String,
+    val description: String
 )

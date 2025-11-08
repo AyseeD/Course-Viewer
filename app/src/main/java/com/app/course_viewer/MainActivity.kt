@@ -38,17 +38,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun createStaticCourses(): List<Course> {
         return listOf(
-            Course("CENG 101", "Introduction to Programming", 4, "Fall"),
-            Course("CENG 210", "Data Structures", 3, "Spring"),
-            Course("CENG 330", "Operating Systems", 4, "Fall"),
-            Course("CENG 343", "Mobile Applications", 3, "Spring"),
-            Course("MATH 201", "Linear Algebra", 3, "Fall"),
-            Course("PHYS 101", "Physics I", 4, "Spring"),
-            Course("CENG 443", "Software Engineering", 3, "Fall"),
-            Course("ELEC 220", "Digital Systems", 3, "Spring"),
-            Course("CENG 421", "Computer Networks", 3, "Fall"),
-            Course("STAT 250", "Probability & Statistics", 3, "Spring"),
-            Course("CIVL 110", "Engineering Drawing", 2, "Fall")
+            Course("CENG 101", "Introduction to Programming", 4, "Fall", "Learn programming languages and terms"),
+            Course("CENG 210", "Data Structures", 3, "Spring","Learn data structures with C++"),
+            Course("CENG 330", "Operating Systems", 4, "Fall","Learn Operating systems of computers"),
+            Course("CENG 343", "Mobile Applications", 3, "Spring","Learn mobil application making on android studio"),
+            Course("MATH 201", "Linear Algebra", 3, "Fall","Learn linear algebra formulas"),
+            Course("PHYS 101", "Physics I", 4, "Spring","Learn AP physics"),
+            Course("CENG 443", "Software Engineering", 3, "Fall","Learn conventions of software engineering"),
+            Course("ELEC 220", "Digital Systems", 3, "Spring","Learn different digital systems"),
+            Course("CENG 421", "Computer Networks", 3, "Fall","Learn the layers of network"),
+            Course("STAT 250", "Probability & Statistics", 3, "Spring","Learn probability calculation"),
+            Course("CIVL 110", "Engineering Drawing", 2, "Fall","Learn drawing for engineers")
         )
     }
 

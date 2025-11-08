@@ -1,9 +1,26 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Course_Viewer" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <style name="Theme.Course_Viewer" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Light Theme Colors -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSurface">@color/cold_white</item>
+        <item name="colorOnSurface">@color/gray</item>
+
+        <item name="android:navigationBarColor">@color/cold_white</item>
+        <item name="android:statusBarColor">@color/blue</item>
+
+        <!-- Card View Styling -->
+        <item name="materialCardViewStyle">@style/AppCardViewStyle</item>
     </style>
 
-    <style name="Theme.Course_Viewer" parent="Base.Theme.Course_Viewer" />
+    <!-- Card Style -->
+    <style name="AppCardViewStyle" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
 </resources>

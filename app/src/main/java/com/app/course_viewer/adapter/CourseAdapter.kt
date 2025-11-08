@@ -29,6 +29,7 @@ class CourseAdapter(
             binding.tvCourseCode.text = course.code
             binding.tvCourseName.text = course.name
             binding.tvCourseMeta.text = "${course.credits} • ${course.semester}"
+            binding.tvCourseDesc.text = course.description;
             binding.root.setOnClickListener { itemClick(course) }
         }
     }
