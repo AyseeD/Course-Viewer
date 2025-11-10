@@ -3,7 +3,6 @@ package com.app.course_viewer.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSortSpinner() {
-        val sortOptions = listOf("None", "Code (A → Z)", "Credits (High → Low)")
+        val sortOptions = listOf("None", "Code", "Credits")
         val sortAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sortOptions)
         binding.spinnerSort.adapter = sortAdapter
         binding.spinnerSort.setSelection(0)
@@ -102,14 +101,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showCourseDetails(course: Course) {
         val msg = """
-            • Code: ${course.code}
-            • Name: ${course.name}
-            • Credits: ${course.credits}
-            • Semester: ${course.semester}
+            - Code: ${course.code}
+            - Name: ${course.name}
+            - Credits: ${course.credits}
+            - Semester: ${course.semester}
+            - Description: ${course.description}
         """.trimIndent()
 
         MaterialAlertDialogBuilder(this)
-            .setTitle("\uD83D\uDCDA ${course.code}")
+            .setTitle(course.code)
             .setMessage(msg)
             .setPositiveButton("Close", null)
             .show()
