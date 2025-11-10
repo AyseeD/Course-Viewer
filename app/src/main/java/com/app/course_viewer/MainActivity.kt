@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.course_viewer.adapter.CourseAdapter
 import com.app.course_viewer.databinding.ActivityMainBinding
 import com.app.course_viewer.model.Course
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -101,16 +102,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun showCourseDetails(course: Course) {
         val msg = """
-            Code: ${course.code}
-            Name: ${course.name}
-            Credits: ${course.credits}
-            Semester: ${course.semester}
+            • Code: ${course.code}
+            • Name: ${course.name}
+            • Credits: ${course.credits}
+            • Semester: ${course.semester}
         """.trimIndent()
 
-        AlertDialog.Builder(this)
-            .setTitle("Course Details")
+        MaterialAlertDialogBuilder(this)
+            .setTitle("\uD83D\uDCDA ${course.code}")
             .setMessage(msg)
-            .setPositiveButton("OK", null)
+            .setPositiveButton("Close", null)
             .show()
     }
 }
