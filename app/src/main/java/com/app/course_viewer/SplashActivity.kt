@@ -17,7 +17,7 @@ class SplashActivity: AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //2 ms of splash screen
+        //2 seconds of splash screen
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
