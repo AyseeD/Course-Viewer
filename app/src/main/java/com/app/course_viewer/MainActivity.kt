@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         """.trimIndent()
 
         MaterialAlertDialogBuilder(this)
-            .setTitle(course.code)
+            .setTitle("\uD83E\uDEB7 ${course.code}")
             .setMessage(msg)
             .setPositiveButton("Close", null)
             .show()
