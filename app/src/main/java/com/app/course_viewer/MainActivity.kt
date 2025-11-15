@@ -22,8 +22,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //list of example courses
         courses = createStaticCourses()
 
+        //adapter for example courses
         adapter = CourseAdapter(courses) { course ->
             showCourseDetails(course)
         }
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setupSearchView()
     }
 
+    //create example courses
     private fun createStaticCourses(): List<Course> {
         return listOf(
             Course("CENG 101", "Introduction to Programming", 4, "Fall", "Learn programming languages and terms"),
@@ -99,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    //for the little alertdialog box
     private fun showCourseDetails(course: Course) {
         val msg = """
             - Code: ${course.code}

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.course_viewer.databinding.ActivitySplashBinding
 import com.app.course_viewer.ui.MainActivity
 
+//the splash screen activity
 class SplashActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
 
@@ -16,6 +17,7 @@ class SplashActivity: AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //2 ms of splash screen
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()

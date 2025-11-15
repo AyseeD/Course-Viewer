@@ -10,6 +10,7 @@ import com.app.course_viewer.model.Course
 import java.util.*
 import kotlin.collections.ArrayList
 
+//the class for recyclerview filter and sorts adapter
 class CourseAdapter(
     private val originalList: List<Course>,
     private val itemClick: (Course) -> Unit
@@ -17,14 +18,15 @@ class CourseAdapter(
 
     private val filteredList = ArrayList<Course>().apply { addAll(originalList) }
 
-    private var semesterFilter: String = "All" // All / Fall / Spring
-    private var searchQuery: String = ""
-    private var sortMode: SortMode = SortMode.NONE
+    private var semesterFilter: String = "All" //has all, fall and spring
+    private var searchQuery: String = "" //for searching by string for code or course name
+    private var sortMode: SortMode = SortMode.NONE //for sorting code in asceending, or credits in descending
 
     enum class SortMode { NONE, CODE_ASC, CREDITS_DESC }
 
     inner class CourseViewHolder(private val binding: ItemCourseBinding) :
         RecyclerView.ViewHolder(binding.root) {
+            //gives the info needed for the course displaying in the recyclerview
         fun bind(course: Course) {
             binding.tvCourseCode.text = course.code
             binding.tvCourseName.text = course.name
@@ -34,18 +36,20 @@ class CourseAdapter(
         }
     }
 
+    //called only when recyclerView needs a new item, item_course.xml is turned to a real view obj
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         val binding = ItemCourseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CourseViewHolder(binding)
     }
 
+    //fills the row with actual data by connecting data to ui
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         holder.bind(filteredList[position])
     }
 
     override fun getItemCount(): Int = filteredList.size
 
-    // public setters
+    //setters for filter, sort, search
     fun setSemesterFilter(semester: String) {
         semesterFilter = semester
         filter.filter(searchQuery)
@@ -64,14 +68,13 @@ class CourseAdapter(
 
     private fun applySort() {
         when (sortMode) {
-            SortMode.NONE -> {} // keep current
+            SortMode.NONE -> {} //keep current
             SortMode.CODE_ASC -> filteredList.sortWith(compareBy { normalizeCourseCode(it.code) })
             SortMode.CREDITS_DESC -> filteredList.sortWith(compareByDescending { it.credits })
         }
     }
 
     private fun normalizeCourseCode(code: String): String {
-        // attempt to make numeric suffix sort correctly (CENG 9 < CENG 10)
         val parts = code.trim().split("\\s+".toRegex(), 2)
         return if (parts.size == 2) {
             val dept = parts[0]
@@ -87,11 +90,11 @@ class CourseAdapter(
                 val q = constraint?.toString()?.lowercase(Locale.getDefault()) ?: ""
                 val temp = ArrayList<Course>()
                 for (c in originalList) {
-                    // semester check
+                    //semester check
                     if (semesterFilter != "All" && !c.semester.equals(semesterFilter, true)) {
                         continue
                     }
-                    // search check
+                    //search check
                     if (q.isNotEmpty()) {
                         val inCode = c.code.lowercase(Locale.getDefault()).contains(q)
                         val inName = c.name.lowercase(Locale.getDefault()).contains(q)
