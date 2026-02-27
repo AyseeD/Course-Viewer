@@ -2,6 +2,9 @@
 This is a course viewer project made with Android Studio using XML layouts and Kotlin development using gradle. It showcases static list of courses with details, and has a light and dark theme design. 
 Since it is a simple design it has no connection to a local or remote database.
 
+<img width="405" height="677" alt="Screenshot 2026-02-27 at 11 36 14" src="https://github.com/user-attachments/assets/e8081613-f584-4201-b3b7-d94863e12306" />
+
+
 ## Tech Stack
 - Language: Kotlin
 - UI: XML Layouts
